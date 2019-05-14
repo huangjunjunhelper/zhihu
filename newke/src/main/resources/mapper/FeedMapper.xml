@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huangjun.dao.FeedDAO">
+    <select id="findById" resultType="com.huangjun.model.Feed">
+        SELECT * 
+        FROM Feed
+        WHERE id = #{id}
+    </select>
+    
+     <select id="findByUserIds" resultType="com.huangjun.model.Feed">
+        SELECT * 
+        FROM Feed
+        WHERE user_id in 
+        <foreach item="item" index="index" collection="userIds"  open="(" separator="," close=")">
+        	#{item}
+  		</foreach>
+        order by created_date
+        limit #{start},#{count}
+    </select>
+    
+     <insert id="addFeed">
+     	insert into feed(user_id,entity_type,created_date,data)  values(#{user_id},#{entity_type},#{created_date},#{data})
+     </insert>
+    
+    
+
+</mapper>

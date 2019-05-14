@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huangjun.dao.CommentDAO">
+    <select id="findAll" resultType="com.huangjun.model.Comment">
+        SELECT * 
+        FROM Comment
+        WHERE entity_id=#{entity_id} and entity_type=#{entity_type}
+        limit #{start},#{count}
+    </select>
+    
+     <select id="findComment" resultType="com.huangjun.model.Comment">
+        SELECT * 
+        FROM Comment
+        WHERE id = #{id}
+    </select>
+    
+     <select id="getAnswerCount" resultType="int">
+        SELECT count(*)
+        FROM Comment
+        WHERE user_id = #{userId} and entity_type=#{entityType}
+    </select>
+    
+    <insert id="addComment" >
+    	INSERT INTO Comment(content,user_id,created_date,entity_id,entity_type,status) Values(#{content},#{user_id},#{created_date},#{entity_id},#{entity_type},#{status})
+    </insert>
+    
+    <update id="updateComment" >
+    	UPDATE Comment SET status=#{status}
+    	WHERE id = #{id}
+    </update>
+    
+    
+
+</mapper>

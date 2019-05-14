@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+	<div th:each="feed:${feeds}">
+		<div>
+			<span th:text="${feed.dataJSON.headUrl}"></span>
+		</div>
+	</div>
+	
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huangjun.dao.TicketDAO">
+    <select id="findByTicket" resultType="com.huangjun.model.Ticket">
+    	SELECT * 
+    	FROM Ticket 
+    	WHERE ticket = #{ticket} 
+    </select>
+    
+    
+    <insert id="addTicket" >
+    	INSERT INTO Ticket(user_id,ticket,expired,status) Values(#{user_id},#{ticket},#{expired},#{status})
+    </insert>
+    
+    
+    <delete id="deleteTicket" >
+    	DELETE 
+    	FROM Ticket
+    	WHERE ticket = #{ticket}
+    </delete>
+    
+
+</mapper>

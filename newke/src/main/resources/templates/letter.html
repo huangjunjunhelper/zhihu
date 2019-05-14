@@ -1,0 +1,42 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN" dropeffect="none" class="js is-AppPromotionBarVisible cssanimations csstransforms csstransitions flexbox no-touchevents no-mobile" style="">
+<head th:replace="common::commonHeader('主页')">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<link rel="stylesheet" href="../styles/letter.css">
+<body>
+    <div id="main">
+        <div class="zg-wrap zu-main clearfix ">
+            <ul th:each="view:${views}"class="letter-list" >
+                <li id="conversation-item-10001_622873">
+                <a class="letter-link" th:href="@{'/letterDetail/'+${view[message].conversation_id}}"></a>
+                <div class="letter-info">
+                <span class="l-time"  th:text="${#dates.format(view['message'].created_date, 'yyyy-MM-dd')}"></span>
+                <div class="l-operate-bar">
+                <a th:href="@{'/letterDetail/'+${view[message].conversation_id}}" th:text="${view[message].conversation_id}">
+                </a>
+                </div>
+                </div>
+                <div class="chat-headbox">
+                <span class="msg-num" th:text="${view[message].has_read}">
+                </span>
+                <a class="list-head">
+                <img alt="头像" th:src="@{${view[user].head_url}}">
+                </a>
+                </div>
+                <div class="letter-detail">
+                <a  th:title="${view[user].name}" class="letter-name level-color-1" th:text="${view[user].name}">
+                </a>
+                <p class="letter-brief">
+                <a th:href="@{'/letterDetail/'+${view[message].conversation_id}}"  th:text="${view[message].content}">
+                </a>
+                </p>
+                </div>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+<div th:include="common::commonFooter"></div>
+</body>
+</html>

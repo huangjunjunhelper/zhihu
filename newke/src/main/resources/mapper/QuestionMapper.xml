@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huangjun.dao.QuestionDAO">
+    <select id="findAll" resultType="com.huangjun.model.Question">
+        SELECT * 
+        FROM Question
+        <if test="userId != 0">
+        WHERE user_id = #{userId}
+        </if>
+        order by created_date desc
+        limit #{start},#{count}
+    </select>
+
+    
+    <select id="findById" resultType="com.huangjun.model.Question">
+    	SELECT * 
+    	FROM Question 
+    	WHERE id = #{id} 
+    </select>
+    
+    <select id="getCount" resultType="int">
+    	SELECT count(*) 
+    	FROM Question 
+    	WHERE user_id = #{userId} 
+    </select>
+    
+    <insert id="addQuestion" useGeneratedKeys="true" keyProperty="id">
+    	INSERT INTO Question(title,content,user_id,created_date,comment_count) Values(#{title},#{content},#{user_id},#{created_date},#{comment_count})
+    </insert>
+    
+    <update id="updateQuestion" >
+    	UPDATE Question SET title=#{title},content=#{content},user_id=#{user_id},created_date=#{created_date},comment_count=#{comment_count}
+    	WHERE id = #{id}
+    </update>
+    
+    <delete id="deleteQuestion" >
+    	DELETE 
+    	FROM Question
+    	WHERE id = #{id}
+    </delete>
+    
+
+</mapper>

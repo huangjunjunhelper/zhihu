@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.huangjun.dao.UserDAO">
+    <select id="findAll" resultType="com.huangjun.model.User">
+        SELECT * 
+        FROM User
+    </select>
+    
+    <select id="findById" resultType="com.huangjun.model.User">
+    	SELECT * 
+    	FROM User 
+    	WHERE id = #{id} 
+    </select>
+    
+     <select id="findByName" resultType="com.huangjun.model.User">
+    	SELECT * 
+    	FROM User 
+    	WHERE name = #{name} 
+    </select>
+    
+    <insert id="addUser" >
+    	INSERT INTO User(name,password,salt,head_url) Values(#{name},#{password},#{salt},#{head_url})
+    </insert>
+    
+    <update id="updateUser" >
+    	UPDATE User SET name=#{name},password=#{password},salt=#{salt},head_url=#{head_url}
+    	WHERE id = #{id}
+    </update>
+    
+    <delete id="deleteUser" >
+    	DELETE 
+    	FROM User
+    	WHERE id = #{id}
+    </delete>
+    
+
+</mapper>
